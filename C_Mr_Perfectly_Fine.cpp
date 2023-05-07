@@ -72,16 +72,51 @@ vi fib(int kk)
 #pragma endregion region1;
 void solve()
 {
+    int n;
+    cin >> n;
     string s;
-    cin >> s;
-    int count = 0;
-    string a = "codeforces";
-    fl(s.length())
+    int k;
+    int skil1 = -1;
+    int skil2 = -1;
+    int answer = -1;
+    int flag1 = 0, flag2 = 0;
+    fl(n)
     {
-        if (s[i] != a[i])
-            count++;
+        cin >> k;
+        cin >> s;
+        if (s[0] == '1' && s[1] == '0')
+        {
+            if (skil1 == -1)
+                skil1 = k;
+            else
+                skil1 = min(skil1, k);
+        }
+        if (s[1] == '1' && s[0] == '0')
+        {
+            if (skil2 == -1)
+                skil2 = k;
+            else
+                skil2 = min(skil2, k);
+        }
+        if (s[0] == '1' && s[1] == '1')
+        {
+            if (answer == -1)
+                answer = k;
+            else
+                answer = min(answer, k);
+        }
     }
-    cout << count << endl;
+    if ((skil1 == -1 || skil2 == -1) && (answer == -1))
+        cout << -1 << endl;
+    else if ((skil1 == -1 || skil2 == -1) && (answer != -1))
+        cout << answer << endl;
+    else
+    {
+        if (answer == -1)
+            cout << skil1 + skil2 << endl;
+        else
+            cout << min(answer, skil1 + skil2) << endl;
+    }
 }
 #pragma region region2
 signed main()

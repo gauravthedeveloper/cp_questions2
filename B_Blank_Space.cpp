@@ -72,16 +72,32 @@ vi fib(int kk)
 #pragma endregion region1;
 void solve()
 {
-    string s;
-    cin >> s;
+    int n;
+    cin >> n;
+
     int count = 0;
-    string a = "codeforces";
-    fl(s.length())
+    int answer = 0;
+
+    vi v(n);
+    fl(n)
     {
-        if (s[i] != a[i])
-            count++;
+        cin >> v[i];
     }
-    cout << count << endl;
+    fl(n)
+    {
+        if (v[i] == 0)
+        {
+            count++;
+            answer = max(answer, count);
+        }
+        else
+        {
+
+            count = 0;
+        }
+    }
+
+    cout << answer << endl;
 }
 #pragma region region2
 signed main()
