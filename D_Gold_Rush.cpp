@@ -1,7 +1,7 @@
 #pragma region region1
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-using namespace __gnu_pbds;
+// #include <ext/pb_ds/assoc_container.hpp>
+// using namespace __gnu_pbds;
 using namespace std;
 
 #define ff first
@@ -12,7 +12,10 @@ using namespace std;
 #define pb push_back
 #define mp make_pair
 #define pii pair<int, int>
+#define pic pair<int, char>
+#define pci pair<char, int>
 #define vi vector<int>
+#define vc vector<char>
 #define li list<int>
 #define vvi vector<vector<int>>
 #define mii map<int, int>
@@ -20,6 +23,8 @@ using namespace std;
 #define pqs priority_queue<int, vi, greater<int>>
 #define fl(n) for (int i = 0; i < n; i++)
 #define flj(n) for (int j = 0; j < n; j++)
+#define upper(s1) transform(s1.begin(), s1.end(), s1.begin(), ::toupper)
+#define lower(s1) transform(s1.begin(), s1.end(), s1.begin(), ::tolower)
 #define setbits(x) __builtin_popcountll(x)
 #define zrobits(x) __builtin_ctzll(x)
 #define mod 1000000000
@@ -33,7 +38,7 @@ using namespace std;
     cin >> x; \
     while (x--)
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
+// typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 string getString(char x)
 {
     string s(1, x);
@@ -53,38 +58,57 @@ void sectumsempra07()
     //     freopen("Files/output.txt", "w", stdout);
     // #endif
 }
-void fib(int i, vi &v)
+vi fib(int kk)
 {
-    if (i > (v.size() / 2) - 1)
-        return;
-    int p = v[i];
-    v[i] = v[v.size() - 1 - i];
-    v[v.size() - 1 - i] = p;
-    fib(i + 1, v);
-}
+    vi v(kk + 1);
+    v[0] = v[1] = 1;
+    for (int i = 2; i < kk + 1; i++)
+    {
+        v[i] = v[i - 1] + v[i - 2];
+    }
 
+    return v;
+}
 #pragma endregion region1;
+void doi(vi &v, int a)
+{
+    if (a % 3 == 0)
+    {
+        v.pb(a / 3);
+        v.pb(2 * (a / 3));
+        doi(v, a / 3);
+        doi(v, 2 * (a / 3));
+    }
+    else
+        return;
+}
 void solve()
 {
-    int n;
-    cin >> n;
-    vi v(n);
-    fl(n)
+    int a, b;
+    cin >> a >> b;
+    if (a == b)
     {
-        cin >> v[i];
+        cout << "YES" << endl;
+        return;
     }
-    fib(0, v);
-    fl(n)
+    vi v;
+    doi(v, a);
+    fl(v.size())
     {
-        cout << v[i] << " ";
+        if (v[i] == b)
+        {
+            cout << "YES" << endl;
+            return;
+        }
     }
+    cout << "NO" << endl;
 }
 #pragma region region2
 signed main()
 {
-    // sectumsempra07();
+    sectumsempra07();
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
         solve();
     return 0;

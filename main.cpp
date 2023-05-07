@@ -12,10 +12,7 @@ using namespace std;
 #define pb push_back
 #define mp make_pair
 #define pii pair<int, int>
-#define pic pair<int, char>
-#define pci pair<char, int>
 #define vi vector<int>
-#define vc vector<char>
 #define li list<int>
 #define vvi vector<vector<int>>
 #define mii map<int, int>
@@ -23,8 +20,6 @@ using namespace std;
 #define pqs priority_queue<int, vi, greater<int>>
 #define fl(n) for (int i = 0; i < n; i++)
 #define flj(n) for (int j = 0; j < n; j++)
-#define upper(s1) transform(s1.begin(), s1.end(), s1.begin(), ::toupper)
-#define lower(s1) transform(s1.begin(), s1.end(), s1.begin(), ::tolower)
 #define setbits(x) __builtin_popcountll(x)
 #define zrobits(x) __builtin_ctzll(x)
 #define mod 1000000000
@@ -72,16 +67,11 @@ vi fib(int kk)
 #pragma endregion region1;
 void solve()
 {
-    int c;
-    cin >> c;
-    cout << "Solving" << endl;
-    cout << "================================" << endl;
-    cout << c << endl;
 }
 #pragma region region2
 signed main()
 {
-    sectumsempra07();
+    // sectumsempra07();
     int t = 1;
     // cin >> t;
     while (t--)
