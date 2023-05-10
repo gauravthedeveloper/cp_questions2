@@ -1,92 +1,273 @@
-#pragma region region1
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-using namespace __gnu_pbds;
-using namespace std;
 
-#define ff first
-#define ss second
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
+using namespace std;
+using namespace __gnu_pbds;
+
+#define loop(a, b, c) for (int a = b; a < c; a++)
+#define loopr(a, b, c) for (int a = b; a > c; a--)
+#define nl ("\n")
 #define int long long
 #define double long double
-#define ll long long
-#define pb push_back
-#define mp make_pair
-#define pii pair<int, int>
 #define vi vector<int>
-#define li list<int>
-#define vvi vector<vector<int>>
-#define mii map<int, int>
-#define pqb priority_queue<int>
-#define pqs priority_queue<int, vi, greater<int>>
-#define fl(n) for (int i = 0; i < n; i++)
-#define flj(n) for (int j = 0; j < n; j++)
-#define setbits(x) __builtin_popcountll(x)
-#define zrobits(x) __builtin_ctzll(x)
-#define mod 1000000000
-#define MOD 1000000007
-#define inf 1e9
-#define minf -1e9
-#define ps(x, y) fixed << setprecision(y) << x
-#define mk(arr, n, type) type *arr = new type[n];
-#define w(x)  \
-    int x;    \
-    cin >> x; \
-    while (x--)
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define vb vector<bool>
+#define vs vector<string>
+#define pb(n) push_back(n)
+#define eb(n) emplace_back(n)
+#define mp(a, b) make_pair(a, b)
+#define bitcntll(n) __builtin_popcountll(n)
+#define ff first
+#define ss second
+#define sz(s) (long long)(s.size())
+#define all(v) (v).begin(), (v).end()
+#define sp(n) cout << setprecision(n) << fixed;
+#define in(v)            \
+    for (auto &item : v) \
+        cin >> item;
+#define inp(v)           \
+    for (auto &item : v) \
+        cin >> item.ff >> item.ss;
+#define google(T) cout << "Case #" << T << ": ";
+
 typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
-string getString(char x)
+// *find_by_order, order_of_key
+
+#ifndef ONLINE_JUDGE
+#define db(x)          \
+    cerr << #x << " "; \
+    _print(x);         \
+    cerr << nl;
+#define gt(T) cerr << "Case #" << T << ": " << nl;
+#else
+#define db(x)
+#define gt(T)
+#endif
+
+void _print(int t)
 {
-    string s(1, x);
-    return s;
+    cerr << t;
 }
-int lcm(int x, int y)
+void _print(double t) { cerr << t; }
+void _print(string t) { cerr << t; }
+void _print(char t) { cerr << t; }
+void _print(bool t) { cerr << ((t) ? "true" : "false"); }
+
+template <class T, class V>
+void _print(pair<T, V> p)
 {
-    return (x * y) / __gcd(x, y);
+    cerr << "{";
+    _print(p.ff);
+    cerr << ",";
+    _print(p.ss);
+    cerr << "}";
 }
-void sectumsempra07()
+template <class T>
+void _print(vector<T> v)
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-    // #ifndef ONLINE_JUDGE
-    //     freopen("Files/input.txt", "r", stdin);
-    //     freopen("Files/output.txt", "w", stdout);
-    // #endif
+    cerr << "[ ";
+    for (T i : v)
+    {
+        _print(i);
+        cerr << " ";
+    }
+    cerr << "]";
 }
-void fib(int i, vi &v)
+template <class T>
+void _print(set<T> v)
 {
-    if (i > (v.size() / 2) - 1)
-        return;
-    int p = v[i];
-    v[i] = v[v.size() - 1 - i];
-    v[v.size() - 1 - i] = p;
-    fib(i + 1, v);
+    cerr << "[ ";
+    for (T i : v)
+    {
+        _print(i);
+        cerr << " ";
+    }
+    cerr << "]";
+}
+template <class T>
+void _print(multiset<T> v)
+{
+    cerr << "[ ";
+    for (T i : v)
+    {
+        _print(i);
+        cerr << " ";
+    }
+    cerr << "]";
+}
+template <class T, class V>
+void _print(map<T, V> v)
+{
+    cerr << "[ ";
+    for (auto i : v)
+    {
+        _print(i);
+        cerr << " ";
+    }
+    cerr << "]";
+}
+template <class T, class V>
+void _print(unordered_map<T, V> v)
+{
+    cerr << "[ ";
+    for (auto i : v)
+    {
+        _print(i);
+        cerr << " ";
+    }
+    cerr << "]";
 }
 
-#pragma endregion region1;
-void solve()
+inline void ayu()
 {
-    int n;
-    cin >> n;
-    vi v(n);
-    fl(n)
-    {
-        cin >> v[i];
-    }
-    fib(0, v);
-    fl(n)
-    {
-        cout << v[i] << " ";
-    }
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    freopen("error.txt", "w", stderr);
+#endif
 }
-#pragma region region2
+
+// int dx[] = { -1 , 1 ,  0  , 0 , -1  , -1  ,  1  , 1  };
+// int dy[] = { 0  , 0 , -1  , 1 , -1  ,  1  , -1  , 1  };
+
+//            { U  , D ,  L  , R , UL  , UR  , DL  , DR }
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+int modadd(int a, int b, int m)
+{
+    a %= m;
+    b %= m;
+    return (a + b) % m;
+}
+int modmul(int a, int b, int m)
+{
+    a %= m;
+    b %= m;
+    return (a * b) % m;
+}
+int modsub(int a, int b, int m)
+{
+    a %= m;
+    b %= m;
+    return (a - b + m) % m;
+}
+int gcd(int a, int b)
+{
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+int expo(int a, int n, int md)
+{
+    int res = 1;
+    while (n)
+    {
+        if (n & 1)
+        {
+            res = modmul(res, a, md);
+            --n;
+        }
+        else
+        {
+            a = modmul(a, a, md);
+            n >>= 1;
+        }
+    }
+    return res;
+}
+int expo(int a, int n)
+{
+    int res = 1;
+    while (n)
+    {
+        if (n & 1)
+        {
+            res *= a;
+            --n;
+        }
+        else
+        {
+            a *= a;
+            n >>= 1;
+        }
+    }
+    return res;
+}
+template <typename T>
+bool revsort(T a, T b) { return a > b; }
+vb sieve(int n)
+{
+    vb prime(n + 1, 1);
+    prime[0] = prime[1] = 0;
+    for (int i = 2; i * i <= n; i++)
+    {
+        if (prime[i])
+        {
+            for (int j = i * i; j <= n; j += i)
+                prime[j] = 0;
+        }
+    }
+    return prime;
+}
+vs rmspace(string s)
+{
+    vs toreturn;
+    string tmp = "";
+    for (auto i : s)
+    {
+        if (i == ' ')
+        {
+            toreturn.pb(tmp);
+            tmp = "";
+        }
+        else
+            tmp += i;
+    }
+    toreturn.pb(tmp);
+    return toreturn;
+}
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+const double PI = 3.1415926535;
+const int inf = 1e18;
+const int mod = 1000000007;
+
+/*
+
+1. Think Greedy
+2. Think Brute Force
+3. Think solution in reverse order
+4. Think DP [ check constraints carefully ]
+5. Check base cases for DP and prove solution for Greedy
+6. Think Graph
+
+*/
+
+void solve(int T)
+{
+    cout << "Solving" << nl;
+}
+
 signed main()
 {
-    // sectumsempra07();
-    int t = 1;
-    // cin >> t;
-    while (t--)
-        solve();
+    ayu();
+
+    int T = 1;
+
+    cin >> T;
+
+    for (int i = 1; i <= T; i++)
+        solve(i);
+
+#ifndef ONLINE_JUDGE
+    double timeTaken = 1000.0 * clock() / CLOCKS_PER_SEC;
+    cout << "\n[Finished in " << timeTaken << "ms]";
+    cerr << "\n[Finished in " << timeTaken << "ms]";
+#endif
+
     return 0;
 }
-#pragma endregion region2
