@@ -33,10 +33,11 @@ using namespace std;
 #define minf -1e9
 #define ps(x, y) fixed << setprecision(y) << x
 #define mk(arr, n, type) type *arr = new type[n];
-#define w(x)  \
-    int x;    \
-    cin >> x; \
-    while (x--)
+#define w(x)                                                           \
+    int i_am_naming_this_badly_so_that_i_dont_use_it_accidentally = 1; \
+    cin >> i_am_naming_this_badly_so_that_i_dont_use_it_accidentally;  \
+    i_am_naming_this_badly_so_that_i_dont_use_it_accidentally--;       \
+    while (i_am_naming_this_badly_so_that_i_dont_use_it_accidentally--)
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 string getString(char x)
@@ -74,28 +75,26 @@ void solve()
 {
     int n;
     cin >> n;
+    int maxi = minf;
     vi v(n);
-    int difference = 0, answer = 0;
     fl(n)
     {
         cin >> v[i];
-    }
+        maxi = max(v[i], maxi);
+    };
     fl(n)
     {
-        if (v[i] != (i + 1))
-            difference = abs(v[i] - (i + 1));
-        answer = __gcd(answer, difference);
+        cout << n - v[i] + 1 << " ";
     }
-    cout << answer << endl;
+    cout << endl;
 }
 #pragma region region2
 signed main()
 {
     sectumsempra07();
-    int t = 1;
+    int t;
     cin >> t;
     while (t--)
         solve();
-    return 0;
 }
 #pragma endregion region2

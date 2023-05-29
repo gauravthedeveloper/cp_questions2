@@ -75,7 +75,7 @@ void solve()
     int n;
     cin >> n;
     vi v(n);
-    int difference = 0, answer = 0;
+    int difference, answer = minf;
     fl(n)
     {
         cin >> v[i];

@@ -18,6 +18,7 @@ using namespace std;
 #define vc vector<char>
 #define li list<int>
 #define vvi vector<vector<int>>
+#define uii unordered_map<int, int>
 #define mii map<int, int>
 #define pqb priority_queue<int>
 #define pqs priority_queue<int, vi, greater<int>>
@@ -32,11 +33,12 @@ using namespace std;
 #define inf 1e9
 #define minf -1e9
 #define ps(x, y) fixed << setprecision(y) << x
-#define mk(arr, n, type) type *arr = new type[n];
-#define w(x)  \
-    int x;    \
-    cin >> x; \
-    while (x--)
+#define mk(v1, n, type) type *v1 = new type[n];
+#define w(x)                                                           \
+    int i_am_naming_this_badly_so_that_i_dont_use_it_accidentally = 1; \
+    cin >> i_am_naming_this_badly_so_that_i_dont_use_it_accidentally;  \
+    i_am_naming_this_badly_so_that_i_dont_use_it_accidentally--;       \
+    while (i_am_naming_this_badly_so_that_i_dont_use_it_accidentally--)
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 string getString(char x)
@@ -74,27 +76,71 @@ void solve()
 {
     int n;
     cin >> n;
-    vi v(n);
-    int difference = 0, answer = 0;
-    fl(n)
+    vector<int> v1(n);
+    vector<int> v2(n);
+    uii m1;
+    uii m2;
+    int result = 0;
+    for (int i = 0; i < n; i++)
+        cin >> v1[i];
+    for (int i = 0; i < n; i++)
+        cin >> v2[i];
+
+    int counter = 1;
+    fl(n + 1)
     {
-        cin >> v[i];
+        if (i == n)
+        {
+            m1[v1[i - 1]] = max(counter, m1[v1[i - 1]]);
+            break;
+        }
+        if (v1[i] == v1[i - 1])
+        {
+            counter++;
+        }
+        else
+        {
+            m1[v1[i - 1]] = max(counter, m1[v1[i - 1]]);
+            counter = 1;
+        }
     }
-    fl(n)
+
+    counter = 1;
+    fl(n + 1)
     {
-        if (v[i] != (i + 1))
-            difference = abs(v[i] - (i + 1));
-        answer = __gcd(answer, difference);
+        if (i == n)
+        {
+            m2[v2[i - 1]] = max(counter, m2[v2[i - 1]]);
+            break;
+        }
+        if (v2[i] == v2[i - 1])
+        {
+            counter++;
+        }
+        else
+        {
+            m2[v2[i - 1]] = max(counter, m2[v2[i - 1]]);
+            counter = 1;
+        }
     }
-    cout << answer << endl;
+
+    for (int e : v1)
+    {
+        result = max(result, m1[e] + m2[e]);
+    }
+    for (int e : v2)
+    {
+        result = max(result, m2[e] + m1[e]);
+    }
+    cout << result << endl;
 }
 #pragma region region2
 signed main()
 {
     sectumsempra07();
-    int t = 1;
-    cin >> t;
-    while (t--)
+    int test_cases_sectumsempra07 = 1;
+    cin >> test_cases_sectumsempra07;
+    while (test_cases_sectumsempra07--)
         solve();
     return 0;
 }

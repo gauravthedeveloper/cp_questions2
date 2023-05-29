@@ -1,81 +1,64 @@
-#pragma region region1
-#include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-using namespace __gnu_pbds;
+#include <iostream>
+#include <vector>
 using namespace std;
 
-#define ff first
-#define ss second
-#define int long long
-#define double long double
-#define ll long long
+#define pii pair<int, int>
+#define count bits_builtin_popcount
+#define int_11
 #define pb push_back
 #define mp make_pair
-#define pii pair<int, int>
-#define vi vector<int>
-#define li list<int>
-#define vvi vector<vector<int>>
-#define mii map<int, int>
-#define pqb priority_queue<int>
-#define pqs priority_queue<int, vi, greater<int>>
-#define fl(n) for (int i = 0; i < n; i++)
-#define flj(n) for (int j = 0; j < n; j++)
-#define setbits(x) __builtin_popcountll(x)
-#define zrobits(x) __builtin_ctzll(x)
-#define mod 1000000000
-#define MOD 1000000007
-#define inf 1e9
-#define minf -1e9
-#define ps(x, y) fixed << setprecision(y) << x
-#define mk(arr, n, type) type *arr = new type[n];
-#define w(x)  \
-    int x;    \
-    cin >> x; \
-    while (x--)
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
-string getString(char x)
-{
-    string s(1, x);
-    return s;
-}
-int lcm(int x, int y)
-{
-    return (x * y) / __gcd(x, y);
-}
-void sectumsempra07()
-{
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-    // #ifndef ONLINE_JUDGE
-    //     freopen("Files/input.txt", "r", stdin);
-    //     freopen("Files/output.txt", "w", stdout);
-    // #endif
-}
-vi fib(int kk)
-{
-    vi v(kk + 1);
-    v[0] = v[1] = 1;
-    for (int i = 2; i < kk + 1; i++)
-    {
-        v[i] = v[i - 1] + v[i - 2];
-    }
+int t, n;
+int uu[300069], vv[300069];
+int result = 0;
+vector<pii> GRAPH[300069];
+bool visited_array[300069];
 
-    return v;
-}
-#pragma endregion region1;
-void solve()
+void depth_first_search(int s, int val, int ac)
 {
+    visited_array[s] = true;
+    result = max(result, ac + 1);
+    for (auto pr : GRAPH[s])
+    {
+        int u = pr.first, link = pr.second;
+        if (visited_array[u])
+            continue;
+        if (link < val)
+        {
+            depth_first_search(u, link, ac + 1);
+        }
+        else
+        {
+            depth_first_search(u, link, ac);
+        }
+    }
+    visited_array[s] = false;
+    return;
 }
-#pragma region region2
-signed main()
+
+int32_t main()
 {
-    // sectumsempra07();
-    int t = 1;
-    // cin >> t;
+
+    cin >> t;
     while (t--)
-        solve();
+    {
+        cin >> n;
+        for (int i = 1; i < n; i++)
+        {
+            cin >> uu[i] >> vv[i];
+        }
+        for (int i = 1; i < n; i++)
+        {
+            GRAPH[uu[i]].pb(mp(vv[i], i));
+            GRAPH[vv[i]].pb(mp(uu[i], i));
+        }
+        result = 0;
+        depth_first_search(1, 0, 0);
+        cout << result << "\n";
+        for (int i = 1; i <= n; i++)
+        {
+            GRAPH[i].clear();
+            visited_array[i] = 0;
+        }
+    }
     return 0;
 }
-#pragma endregion region2

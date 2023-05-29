@@ -72,28 +72,26 @@ vi fib(int kk)
 #pragma endregion region1;
 void solve()
 {
-    int n;
-    cin >> n;
-    vi v(n);
-    int difference = 0, answer = 0;
-    fl(n)
+    int k, n, w;
+    cin >> k >> n >> w;
+    int sum = 0;
+    for (int i = 1; i <= w; i++)
     {
-        cin >> v[i];
+        sum = sum + (i * k);
     }
-    fl(n)
+    if (sum <= n)
     {
-        if (v[i] != (i + 1))
-            difference = abs(v[i] - (i + 1));
-        answer = __gcd(answer, difference);
+        cout << 0 << "\n";
     }
-    cout << answer << endl;
+    else
+        cout << sum - n << "\n";
 }
 #pragma region region2
 signed main()
 {
     sectumsempra07();
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
         solve();
     return 0;

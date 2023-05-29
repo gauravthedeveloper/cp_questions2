@@ -15,6 +15,7 @@ using namespace std;
 #define pic pair<int, char>
 #define pci pair<char, int>
 #define vi vector<int>
+#define vpii vector<pair<int, int>>
 #define vc vector<char>
 #define li list<int>
 #define vvi vector<vector<int>>
@@ -33,10 +34,11 @@ using namespace std;
 #define minf -1e9
 #define ps(x, y) fixed << setprecision(y) << x
 #define mk(arr, n, type) type *arr = new type[n];
-#define w(x)  \
-    int x;    \
-    cin >> x; \
-    while (x--)
+#define w(x)                                                           \
+    int i_am_naming_this_badly_so_that_i_dont_use_it_accidentally = 1; \
+    cin >> i_am_naming_this_badly_so_that_i_dont_use_it_accidentally;  \
+    i_am_naming_this_badly_so_that_i_dont_use_it_accidentally--;       \
+    while (i_am_naming_this_badly_so_that_i_dont_use_it_accidentally--)
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 string getString(char x)
@@ -58,6 +60,38 @@ void sectumsempra07()
     //     freopen("Files/output.txt", "w", stdout);
     // #endif
 }
+
+#define pii pair<int, int>
+#define count bits_builtin_popcount
+#define int_11
+
+int t, n;
+int arr1[3000069], arr2[3000069];
+int result = 0;
+vpii GRAPH[3000069];
+bool visited_array[3000069];
+
+void depth_first_search(int s, int value, int ac)
+{
+    visited_array[s] = true;
+    result = max(result, ac + 1);
+    for (auto parent : GRAPH[s])
+    {
+        int u = parent.ff, link = parent.ss;
+        if (visited_array[u])
+            continue;
+        if (link < value)
+        {
+            depth_first_search(u, link, ac + 1);
+        }
+        else
+        {
+            depth_first_search(u, link, ac);
+        }
+    }
+    visited_array[s] = false;
+    return;
+}
 vi fib(int kk)
 {
     vi v(kk + 1);
@@ -70,31 +104,36 @@ vi fib(int kk)
     return v;
 }
 #pragma endregion region1;
+
 void solve()
 {
-    int n;
     cin >> n;
-    vi v(n);
-    int difference = 0, answer = 0;
-    fl(n)
+    for (int i = 1; i < n; i++)
+
+        cin >>
+            arr1[i] >> arr2[i];
+
+    for (int i = 1; i < n; i++)
     {
-        cin >> v[i];
+        GRAPH[arr1[i]].push_back(make_pair(arr2[i], i));
+        GRAPH[arr2[i]].push_back(make_pair(arr1[i], i));
     }
-    fl(n)
+    result = 0;
+    depth_first_search(1, 0, 0);
+    cout << result << "\n";
+    for (int i = 1; i <= n; i++)
     {
-        if (v[i] != (i + 1))
-            difference = abs(v[i] - (i + 1));
-        answer = __gcd(answer, difference);
+        GRAPH[i].clear();
+        visited_array[i] = 0;
     }
-    cout << answer << endl;
 }
 #pragma region region2
 signed main()
 {
     sectumsempra07();
-    int t = 1;
-    cin >> t;
-    while (t--)
+    int test_cases_sectumsempra07 = 1;
+    cin >> test_cases_sectumsempra07;
+    while (test_cases_sectumsempra07--)
         solve();
     return 0;
 }
